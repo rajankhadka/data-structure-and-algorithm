@@ -138,6 +138,15 @@ int fetchData(Node* head, int index){
     throw "index out of bound max";
 }
 
+int getLenth (Node* head){
+    int count = 0;
+    while(head) {
+        head = head->next;
+        count++;
+    }
+    return count;
+
+}
 
 int main(){
     Node* head = nullptr;
@@ -156,6 +165,6 @@ int main(){
         cerr << msg << endl;
     }
     print(head);
-
+    cout << getLenth(head) << endl;
     return 0;
 }
