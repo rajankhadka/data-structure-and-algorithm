@@ -148,23 +148,38 @@ int getLenth (Node* head){
 
 }
 
+// get middle node
+//if even => then last one
+int getMiddle(Node* head){
+    Node *slowPtr = head, *fastPtr = head;
+    if(head->next){
+        while(fastPtr != nullptr and fastPtr->next != nullptr){
+            slowPtr = slowPtr->next;
+            fastPtr = fastPtr->next->next;
+        }
+    }
+    return slowPtr->data;
+}
+
 int main(){
     Node* head = nullptr;
-    head = insertAtBeginning(head,4);
-    head = insertAtBeginning(head,4);
-    head = insertAtEnd(head, 1);
-    head = insertAtEnd(head, 10);
-    head = insertAt(head,5,15);
+//    head = insertAtBeginning(head,4);
+//    head = insertAtBeginning(head,5);
+//    head = insertAtEnd(head, 1);
+//    head = insertAtEnd(head, 10);
+//    head = insertAt(head,5,15);
 //    deletionFromBeginning(&head);
 //    head = deletionFromEnd(head);
 //    head = deletionFrom(head, 10);
-    try {
-        int data = fetchData(head,-5);
-        cout << data << endl;
-    }catch (const char* msg){
-        cerr << msg << endl;
-    }
-    print(head);
-    cout << getLenth(head) << endl;
+//    try {
+//        int data = fetchData(head,-5);
+//        cout << data << endl;
+//    }catch (const char* msg){
+//        cerr << msg << endl;
+//    }
+//    print(head);
+//    cout << getLenth(head) << endl;
+    cout << getMiddle(head) << endl;
+
     return 0;
 }
