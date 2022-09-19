@@ -54,7 +54,65 @@ Node* insertAt(Node* head, int data, int index){
         prev->next = temp;
         temp->next = ptr;
     }else{
-        return insertAtEnd(head,data);
+        ptr->next = temp;
+    }
+    return head;
+}
+
+void deletionFromBeginning(Node** head){
+    if(*head == nullptr){
+        cout << "Head is empty" << endl;
+    }
+    Node* temp = *head;
+    *head = (*head)->next;
+    free(temp);
+}
+
+
+Node* deletionFromEnd(Node* head){
+    if(!head->next){
+        cout<< "List is Empty"<< endl;
+        return head;
+    }
+
+    Node* prev = head;
+    Node* ptr = head;
+    //traverse to the end;
+    while(ptr->next){
+        prev = ptr;
+        ptr = ptr->next;
+    }
+
+    prev->next = nullptr;
+    free(ptr);
+    return head;
+}
+
+Node* deletionFrom(Node* head, int index){
+    if(!head->next){
+        cout << "List is Empty";
+        return head;
+    }
+
+    if(index == 0) {
+        deletionFromBeginning(&head);
+        return head;
+    }
+
+    Node* temp = head;
+    Node* prev = head;
+    while(temp->next && index > 0){
+        prev = temp;
+        temp = temp->next;
+        index--;
+    }
+    if(index == 0){
+        prev->next = temp->next;
+        temp->next = nullptr;
+        free(temp);
+    }else{
+        prev->next = nullptr;
+        free(temp);
     }
     return head;
 }
@@ -68,13 +126,35 @@ void print(Node* head){
     cout<< endl;
 }
 
+//fetch node at particular
+int fetchData(Node* head, int index){
+    if(!head->next || index < 0) throw "index out of bound min";
+    if(index == 0) return head->data;
+    while(head->next && index>0){
+        head = head->next;
+        index--;
+    }
+    if(index == 0) return head->data;
+    throw "index out of bound max";
+}
+
+
 int main(){
     Node* head = nullptr;
     head = insertAtBeginning(head,4);
     head = insertAtBeginning(head,4);
     head = insertAtEnd(head, 1);
     head = insertAtEnd(head, 10);
-    head = insertAt(head,5,10);
+    head = insertAt(head,5,15);
+//    deletionFromBeginning(&head);
+//    head = deletionFromEnd(head);
+//    head = deletionFrom(head, 10);
+    try {
+        int data = fetchData(head,-5);
+        cout << data << endl;
+    }catch (const char* msg){
+        cerr << msg << endl;
+    }
     print(head);
 
     return 0;
