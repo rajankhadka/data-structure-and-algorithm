@@ -258,7 +258,7 @@ int main(){
 //    }catch (const char* msg){
 //        cerr << msg << endl;
 //    }
-//    print(head);
+    print(head);
 //    cout << getLenth(head) << endl;
 //    cout << getMiddle(head) << endl;
 //    cout << _getLength(head) << endl;
