@@ -138,6 +138,7 @@ int fetchData(Node* head, int index){
     throw "index out of bound max";
 }
 
+//get length using iterative method
 int getLenth (Node* head){
     int count = 0;
     while(head) {
@@ -145,7 +146,12 @@ int getLenth (Node* head){
         count++;
     }
     return count;
+}
 
+//get length using recursive method
+int _getLength(Node* head){
+    if (head == nullptr) return 0;
+    return 1 + _getLength(head->next);
 }
 
 // get middle node
@@ -161,11 +167,86 @@ int getMiddle(Node* head){
     return slowPtr->data;
 }
 
+//search element using iterative
+int searchElement(Node* head, int key){
+    if(!head) throw("list is empty");
+    while(head){
+        if(key == head->data){
+            return head->data;
+        }
+        head = head->next;
+    }
+    throw("key doesn't exist");
+}
+
+bool _searchElement(Node* head, int key){
+    if(!head) return false;
+    if(head->data == key) return true;
+    return _searchElement(head->next,key);
+}
+
+//simple method -> len-N+1
+void getNthNodeFromEnd(Node* head, int n){
+    if(!head){
+        cout << "list is empty"<< endl;
+        return;
+    }
+
+    int len = getLenth(head);
+    if(n > len){
+        cout << "nth value is greater than length"<< endl;
+        return;
+    }
+    for(int i=1;i < len-n+1;i++){
+        head = head->next;
+    }
+    cout<< "value at "<< n << " th from end node is: "<< head->data<< endl;
+}
+
+// search nth from end using recursive
+void _getNthNodeFromEnd(Node* head, int n){
+    static int i=0;
+    if(!head) return;
+    _getNthNodeFromEnd(head->next, n);
+    if(++i == n){
+        printf("value at %d th from end node is: %d", n, head->data);
+    }
+}
+
+// search nth from end using two pointer
+void __getNthNodeFromEnd(Node* head, int n){
+    Node* mast = head, *ref= head;
+
+    for(int i=0; i< n; i++){
+        if(mast == nullptr) return;
+        mast = mast->next;
+    }
+
+    while(mast != nullptr){
+        mast = mast->next;
+        ref = ref->next;
+    }
+
+    printf("value at %d th from end node is: %d", n, ref->data);
+}
+
 int main(){
     Node* head = nullptr;
-//    head = insertAtBeginning(head,4);
+    head = insertAtBeginning(head,4);
 //    head = insertAtBeginning(head,5);
-//    head = insertAtEnd(head, 1);
+    head = insertAtEnd(head, 1);
+    head = insertAtEnd(head, 10);
+    head = insertAtEnd(head, 2);
+//    head = insertAtEnd(head, 5);
+//    head = insertAtEnd(head, 6);
+    __getNthNodeFromEnd(head, 4);
+//    _getNthNodeFromEnd(head,2);
+//    cout << _searchElement(head, -1);
+//    try{
+//        cout << searchElement(head, 11);
+//    }catch(const char* msg){
+//        cerr << msg;
+//    }
 //    head = insertAtEnd(head, 10);
 //    head = insertAt(head,5,15);
 //    deletionFromBeginning(&head);
@@ -179,7 +260,8 @@ int main(){
 //    }
 //    print(head);
 //    cout << getLenth(head) << endl;
-    cout << getMiddle(head) << endl;
+//    cout << getMiddle(head) << endl;
+//    cout << _getLength(head) << endl;
 
     return 0;
 }
