@@ -27,6 +27,9 @@ void print(Node* head){
     cout<< endl;
 }
 
+
+
+
 //solution 01) using two loops time O(n^2) space O(1)
 Node* removeDuplicate(Node* head){
     Node *ptr1 = head, *ptr2, *dup;
@@ -47,17 +50,42 @@ Node* removeDuplicate(Node* head){
     return head;
 }
 
+void removeKthNodeFromEnd(Node *head, int k) {
+    // Write your code here.
+    Node *mast= head, *ref=head, *prev= nullptr;
+    for(int i=0;i<k;i++){
+        if(!mast) return;
+        mast = mast->next;
+    }
+
+    while(mast){
+        prev = ref;
+        mast=mast->next;
+        ref=ref->next;
+    }
+    if(prev != nullptr){
+        prev->next = ref->next;
+        free(ref);
+    }else{
+        head->data = ref->next->data;
+        head->next = ref->next->next;
+//        free(ref);
+    }
+//
+}
+
 int main(){
     struct Node* head = nullptr;
-    push(&head, 1);
-    push(&head, 2);
-    push(&head, 2);
-    push(&head, 2);
+    push(&head, 4);
     push(&head, 3);
-    push(&head, 1);
+    push(&head, 2);
+//    push(&head, 1);
+//    push(&head, 0);
     print(head);
-    head = removeDuplicate(head);
+    removeKthNodeFromEnd(head, 3);
     print(head);
+//    head = removeDuplicate(head);
+//    print(head);
 //    push(&head, 21);
 //    push(&head, 21);
 //    push(&head, 11);
