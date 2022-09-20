@@ -16,6 +16,7 @@ void push(struct Node** head_ref, int new_data)
     new_node->next = (*head_ref);
     (*head_ref) = new_node;
 }
+
 //reverse linked list using iterative method
 void reserve(Node** head){
     Node *prev = nullptr, *next = nullptr, *current = *head;
@@ -36,6 +37,7 @@ void print(Node* head){
     cout<< endl;
 }
 
+//solution 02) using by recursion
 Node* __reverse(Node* head)
 {
     if (head == nullptr || head->next == nullptr) return head;
@@ -50,7 +52,6 @@ Node* __reverse(Node* head)
 
 int main(){
     struct Node* head = nullptr;
-    int count = 0;
     push(&head, 1);
     push(&head, 20);
     push(&head, 21);

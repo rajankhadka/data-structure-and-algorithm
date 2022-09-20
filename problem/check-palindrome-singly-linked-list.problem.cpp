@@ -113,6 +113,18 @@ bool isPalindrome(Node* head){
     return res;
 }
 
+//solution 3) using recursion i.e. double pointer;
+bool _isPalindrome(Node* head, Node** leftptr){
+    if(!head) return true;
+    bool result = _isPalindrome(head->next, leftptr);
+    int data = (*leftptr)->data;
+    if(result && data == head->data){
+        *leftptr = (*leftptr)->next;
+        return true;
+    }
+    return false;
+}
+
 void print(Node* head){
     while(head != nullptr){
         printf(" %d ", head->data);
@@ -125,13 +137,14 @@ int main(){
     struct Node* head = nullptr;
     int count = 0;
     push(&head, 1, &count);
-//    push(&head, 2, &count);
-//    push(&head, 3, &count);
-//    push(&head, 2, &count);
-//    push(&head, 1, &count);
-    print(head);
+    push(&head, 2, &count);
+    push(&head, 3, &count);
+    push(&head, 3, &count);
+    push(&head, 1, &count);
+    cout << _isPalindrome(head, &head);
+//    print(head);
 //    cout << count;
 //    cout << checkPalindrome(head, &count);
-    cout << isPalindrome(head) << endl;
-    print(head);
+//    cout << isPalindrome(head) << endl;
+//    print(head);
 }
