@@ -22,7 +22,7 @@ public:
 };
 
 
-void push(struct LinkedList** head_ref, int new_data)
+void push(LinkedList** head_ref, int new_data)
 {
     LinkedList* new_node = new LinkedList(new_data);
     new_node->next = (*head_ref);
