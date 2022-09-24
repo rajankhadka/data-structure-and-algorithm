@@ -9,6 +9,7 @@
 //list3 = 1 3 4 6 7 8 9
 //but there should not be exactly list, but mutated one of the input list (list1 or list2)
 // time O(m+n) m= length of list1, n= length of list2 , space O(1)
+//using iterative method
 #include <iostream>
 using namespace std;
 
@@ -70,6 +71,28 @@ Node* mergeList(Node* list1, Node* list2){
         prev->next = list2;
     }
     return head;
+}
+
+
+//another method
+Node* _mergeList(Node *list1, Node* list2){
+    Node* p1 = list1, *p2 = list2, *p1Prev= nullptr;
+    while(p1 && p2){
+        if(p1->data < p2->data){
+            p1Prev = p1;
+            p1 = p1->next;
+        }else{
+            if(p1Prev)
+                p1Prev->next = p2;
+            p1Prev = p2;
+            p2 = p2->next;
+            p1Prev->next = p1;
+        }
+    }
+    if(p1)
+        p1Prev->next = p2;
+    
+    return list1->data < list2->data ? list1 : list2;
 }
 
 int main(){

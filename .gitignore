@@ -1,3 +1,5 @@
 cmake-build-debug/
 basic.cpp
 .idea/
+CMakeLists.txt
+.vscode/

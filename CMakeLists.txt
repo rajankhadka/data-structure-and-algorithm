@@ -8,3 +8,5 @@ add_executable(problem05 ./problem/remove-duplicate-node-unsorted-singly-linked-
 add_executable(problem06 ./problem/find-loop-singly-linked-list.problem.cpp)
 add_executable(problem07 ./problem/sum-of-two-linked-list.problem.cpp)
 add_executable(problem08 ./problem/merge-singly-linked-list.problem.cpp)
+add_executable(problem008 ./problem/merge-singly-linked-list.problem.cpp)
+add_executable(problem09 ./problem/find-loop-singly-linked-list.problem.cpp)
