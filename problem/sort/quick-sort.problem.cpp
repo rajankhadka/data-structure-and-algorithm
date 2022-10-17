@@ -34,7 +34,7 @@ void quickSort(vector<int> &arr,int start, int end){
 
 
 int main(){
-    vector<int> data{4,1,5,2,-1,3,0,6};
+    vector<int> data{2,8,1,3};
 //    cout << data.size();
     for(const int &i:data){
         cout << i << "   ";
